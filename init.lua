@@ -50,3 +50,9 @@ vim.pack.add({{ src = "https://github.com/nvim-telescope/telescope.nvim"}})
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set({'n','i','v','t'}, '<C-p>', telescope_builtin.find_files)
 vim.keymap.set({'n','i','v','t'}, '<C-l>', telescope_builtin.live_grep)
+
+-- file explorer
+vim.pack.add({{ src = "https://github.com/mikavilpas/yazi.nvim" }})
+vim.keymap.set("n", "<C-y>", function()
+  require("yazi").yazi()
+end)

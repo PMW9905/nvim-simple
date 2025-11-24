@@ -4,10 +4,6 @@
       "rev": "484dd560dccb2d2842685c441ad2b54a54ffef1b",
       "src": "https://github.com/sainnhe/everforest"
     },
-    "fzf-lua": {
-      "rev": "3170d98240266a68c2611fc63260c3ab431575aa",
-      "src": "https://github.com/ibhagwan/fzf-lua"
-    },
     "lualine.nvim": {
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
@@ -35,6 +31,10 @@
     "transparent.nvim": {
       "rev": "8ac59883de84e9cd1850ea25cf087031c5ba7d54",
       "src": "https://github.com/xiyaowong/transparent.nvim"
+    },
+    "yazi.nvim": {
+      "rev": "0635b1ef68430b57b15d285d5b16334225c7ad9a",
+      "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
 }
