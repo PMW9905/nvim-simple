@@ -110,7 +110,7 @@ require("blink.cmp").setup({
 	keymap = {
 		preset = "default",
 		['<CR>'] = {},
-		['<Tab>'] = {"select_and_accept"},
+		['<Tab>'] = { "select_and_accept" },
 	},
 	appearance = {
 		use_nvim_cmp_as_default = true,
