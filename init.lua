@@ -21,7 +21,6 @@ vim.g.transparent_enabled = true
 -- status bar
 vim.pack.add({{ src = "https://github.com/nvim-lualine/lualine.nvim" }})
 vim.pack.add({{ src = "https://github.com/nvim-tree/nvim-web-devicons" }})
-
 require('lualine').setup({
 	options = {
 		theme = 'everforest'
@@ -44,3 +43,10 @@ require('toggleterm').setup({
 		border = 'curved',
 	}
 })
+
+-- file grep 
+vim.pack.add({{ src = "https://github.com/nvim-lua/plenary.nvim"}})
+vim.pack.add({{ src = "https://github.com/nvim-telescope/telescope.nvim"}})
+local telescope_builtin = require('telescope.builtin')
+vim.keymap.set({'n','i','v','t'}, '<C-p>', telescope_builtin.find_files)
+vim.keymap.set({'n','i','v','t'}, '<C-l>', telescope_builtin.live_grep)
