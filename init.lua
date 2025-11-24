@@ -3,6 +3,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 vim.o.tabstop = 4
+vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 
 vim.o.swapfile = false
@@ -58,6 +59,10 @@ require('toggleterm').setup({
 -- file grep
 vim.pack.add({ { src = "https://github.com/nvim-lua/plenary.nvim" } })
 vim.pack.add({ { src = "https://github.com/nvim-telescope/telescope.nvim" } })
+vim.pack.add({ { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' } })
+
+require("telescope").load_extension("ui-select")
+
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set({ 'n', 'i', 'v', 't' }, '<C-p>', telescope_builtin.find_files)
 vim.keymap.set({ 'n', 'i', 'v', 't' }, '<C-l>', telescope_builtin.live_grep)
@@ -72,6 +77,7 @@ vim.keymap.set("n", "<C-y>", function()
 	require("yazi").yazi()
 end)
 
+
 -- lsp
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
@@ -83,10 +89,37 @@ require("mason-lspconfig").setup({
 	automatic_enable = true
 })
 
-vim.lsp.enable('lua-language-server')
 
 vim.keymap.set("n", '<leader>fm', vim.lsp.buf.format)
 vim.keymap.set("n", '<leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set("n", '<leader>h', vim.lsp.buf.hover)
+vim.keymap.set("n", '<leader>hd', vim.lsp.buf.hover)
 vim.keymap.set("n", '<leader>df', vim.lsp.buf.definition)
 vim.keymap.set("n", '<leader>dc', vim.lsp.buf.declaration)
+vim.keymap.set("n", '<leader>x', vim.diagnostic.open_float)
+
+vim.lsp.enable('lua_ls')
+
+-- completions
+vim.pack.add({
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("*"), }
+})
+
+require("blink.cmp").setup({
+	fuzzy = { implementation = "lua" },
+	signature = { enabled = true },
+	keymap = {
+		preset = "default",
+		['<CR>'] = {},
+		['<Tab>'] = {"select_and_accept"},
+	},
+	appearance = {
+		use_nvim_cmp_as_default = true,
+		nerd_font_variant = "normal",
+	},
+	completion = {
+		auto_show = true,
+		auto_show_delay_ms = 200,
+	},
+
+	sources = { default = { "lsp" } }
+})
