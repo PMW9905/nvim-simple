@@ -16,6 +16,15 @@ vim.cmd("colorscheme everforest")
 
 -- transparency
 vim.pack.add({{ src = "https://github.com/xiyaowong/transparent.nvim" }})
+
+require("transparent").setup({
+  extra_groups = {
+    "NormalFloat",     -- Floating window background
+    "FloatBorder",     -- Floating window border
+    "FloatTitle",      -- Floating window title (if any)
+  },
+})
+
 vim.g.transparent_enabled = true
 
 -- status bar
@@ -53,6 +62,23 @@ vim.keymap.set({'n','i','v','t'}, '<C-l>', telescope_builtin.live_grep)
 
 -- file explorer
 vim.pack.add({{ src = "https://github.com/mikavilpas/yazi.nvim" }})
+require("yazi").setup({
+  yazi_floating_window_winblend = 0,
+  floating_window_scaling_factor = 0.8, -- Default is 0.9, makes window 90% of screen
+})
 vim.keymap.set("n", "<C-y>", function()
-  require("yazi").yazi()
+	require("yazi").yazi()
 end)
+
+-- lsp
+vim.pack.add({
+	{ src = "https://github.com/neovim/nvim-lspconfig"},
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim"},
+	{ src = "https://github.com/mason-org/mason.nvim"}
+})
+require("mason").setup()
+require("mason-lspconfig").setup({
+	automatic_enable = true
+})
+
+vim.lsp.enable('lua-language-server')
