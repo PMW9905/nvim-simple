@@ -34,3 +34,13 @@ require('nvim-autopairs').setup({
 	event = "InsertEnter",
 	config = true,
 })
+
+-- terminal
+vim.pack.add({{ src = "https://github.com/akinsho/toggleterm.nvim"}})
+require('toggleterm').setup({
+	open_mapping = "<C-k>",
+	direction= 'float',
+	float_opts = {
+		border = 'curved',
+	}
+})
