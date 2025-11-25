@@ -83,7 +83,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'gdscript'
+		'lua', 'gdscript', 'godot_resource', 'gdshader'
 	},
 	auto_install = true
 })
