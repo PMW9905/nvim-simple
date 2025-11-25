@@ -99,7 +99,6 @@ require("mason-lspconfig").setup({
 	automatic_enable = true
 })
 
-
 vim.keymap.set("n", '<leader>fm', vim.lsp.buf.format)
 vim.keymap.set("n", '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set("n", '<leader>hd', vim.lsp.buf.hover)
@@ -107,7 +106,10 @@ vim.keymap.set("n", '<leader>df', vim.lsp.buf.definition)
 vim.keymap.set("n", '<leader>dc', vim.lsp.buf.declaration)
 vim.keymap.set("n", '<leader>x', vim.diagnostic.open_float)
 
-vim.lsp.enable('lua_ls')
+local enabled_language_servers = ['lua_ls', 'gdscript']
+for _, language_server in enabled_language_servers do
+	vim.lsp.enable(language_server)
+end
 
 -- completions
 vim.pack.add({
