@@ -79,7 +79,7 @@ end)
 
 -- syntax highlighting
 vim.pack.add({
-	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter'}
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' }
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
@@ -106,8 +106,8 @@ vim.keymap.set("n", '<leader>df', vim.lsp.buf.definition)
 vim.keymap.set("n", '<leader>dc', vim.lsp.buf.declaration)
 vim.keymap.set("n", '<leader>x', vim.diagnostic.open_float)
 
-local enabled_language_servers = ['lua_ls', 'gdscript']
-for _, language_server in enabled_language_servers do
+local enabled_language_servers = { 'lua_ls', 'gdscript' }
+for _, language_server in ipairs(enabled_language_servers) do
 	vim.lsp.enable(language_server)
 end
 
