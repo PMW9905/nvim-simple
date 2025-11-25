@@ -83,7 +83,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'gdscript', 'godot_resource', 'gdshader'
+		'lua', 'gdscript', 'godot_resource', 'gdshader', 'yaml'
 	},
 	auto_install = true
 })
@@ -94,9 +94,13 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
+
+local enabled_language_servers = { 'lua_ls', 'yamlls'}
+
 require("mason").setup()
 require("mason-lspconfig").setup({
-	automatic_enable = true
+	automatic_enable = true,
+	ensure_installed = enabled_language_servers,
 })
 
 vim.keymap.set("n", '<leader>fm', vim.lsp.buf.format)
@@ -106,7 +110,6 @@ vim.keymap.set("n", '<leader>df', vim.lsp.buf.definition)
 vim.keymap.set("n", '<leader>dc', vim.lsp.buf.declaration)
 vim.keymap.set("n", '<leader>x', vim.diagnostic.open_float)
 
-local enabled_language_servers = { 'lua_ls', 'gdscript' }
 for _, language_server in ipairs(enabled_language_servers) do
 	vim.lsp.enable(language_server)
 end
