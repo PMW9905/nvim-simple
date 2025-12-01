@@ -83,7 +83,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'gdscript', 'godot_resource', 'gdshader', 'yaml'
+		'lua', 'yaml', 'go'
 	},
 	auto_install = true
 })
@@ -95,7 +95,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
 
-local enabled_language_servers = { 'lua_ls', 'yamlls'}
+local enabled_language_servers = { 'lua_ls', 'yamlls', 'go'}
 
 require("mason").setup()
 require("mason-lspconfig").setup({
