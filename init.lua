@@ -31,7 +31,6 @@ require("transparent").setup({
 vim.g.transparent_enabled = true
 
 -- markdown viewer
-
 vim.pack.add({ { src = "https://github.com/OXY2DEV/markview.nvim" } })
 
 -- status bar
@@ -87,7 +86,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'yaml', 'go'
+		'lua', 'yaml', 'go', 'markdown' 
 	},
 	auto_install = true
 })
