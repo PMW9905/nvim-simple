@@ -30,6 +30,10 @@ require("transparent").setup({
 
 vim.g.transparent_enabled = true
 
+-- markdown viewer
+
+vim.pack.add({ { src = "https://github.com/OXY2DEV/markview.nvim" } })
+
 -- status bar
 vim.pack.add({ { src = "https://github.com/nvim-lualine/lualine.nvim" } })
 vim.pack.add({ { src = "https://github.com/nvim-tree/nvim-web-devicons" } })
@@ -125,7 +129,7 @@ require("blink.cmp").setup({
 	keymap = {
 		preset = "default",
 		['<CR>'] = {},
-		['<Tab>'] = { "select_and_accept" },
+		['<Tab>'] = { "select_and_accept", "fallback" },
 	},
 	appearance = {
 		use_nvim_cmp_as_default = true,
