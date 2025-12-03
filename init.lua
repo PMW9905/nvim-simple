@@ -10,6 +10,20 @@ vim.o.swapfile = false
 
 vim.o.winborder = 'rounded'
 
+-- windows powershell config (windows branch only)
+local powershell_options = {
+  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+  shellquote = "",
+  shellxquote = "",
+}
+
+for option, value in pairs(powershell_options) do
+  vim.opt[option] = value
+end
+
 -- leader
 vim.g.mapleader = " "
 
@@ -86,7 +100,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'yaml', 'go', 'markdown' 
+		'lua', 'yaml', 'go', 'markdown'
 	},
 	auto_install = true
 })
@@ -98,7 +112,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
 
-local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls'}
+local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls' }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
