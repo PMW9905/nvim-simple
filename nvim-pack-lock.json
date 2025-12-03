@@ -17,6 +17,10 @@
       "rev": "3170d98240266a68c2611fc63260c3ab431575aa",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "lazygit.nvim": {
+      "rev": "2305deed25bc61b866d5d39189e9105a45cf1cfb",
+      "src": "https://github.com/kdheepak/lazygit.nvim"
+    },
     "lualine.nvim": {
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"

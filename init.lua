@@ -49,6 +49,10 @@ require('nvim-autopairs').setup({
 	config = true,
 })
 
+-- lazygit
+vim.pack.add({{ src = "https://github.com/kdheepak/lazygit.nvim"}})
+vim.keymap.set({ 'n', 'i', 'v', 't' }, '<C-j>', '<CMD>LazyGit<CR>')
+
 -- terminal
 vim.pack.add({ { src = "https://github.com/akinsho/toggleterm.nvim" } })
 require('toggleterm').setup({
