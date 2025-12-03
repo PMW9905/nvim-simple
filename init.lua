@@ -50,7 +50,7 @@ require('nvim-autopairs').setup({
 })
 
 -- lazygit
-vim.pack.add({{ src = "https://github.com/kdheepak/lazygit.nvim"}})
+vim.pack.add({ { src = "https://github.com/kdheepak/lazygit.nvim" } })
 vim.keymap.set({ 'n', 'i', 'v', 't' }, '<C-j>', '<CMD>LazyGit<CR>')
 
 -- terminal
@@ -90,7 +90,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'yaml', 'go', 'markdown' 
+		'lua', 'yaml', 'go', 'markdown'
 	},
 	auto_install = true
 })
@@ -102,7 +102,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
 
-local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls'}
+local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls' }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -138,10 +138,6 @@ require("blink.cmp").setup({
 		use_nvim_cmp_as_default = true,
 		nerd_font_variant = "normal",
 	},
-	completion = {
-		auto_show = true,
-		auto_show_delay_ms = 200,
-	},
 
-	sources = { default = { "lsp" } }
+	sources = { default = { "lsp", "buffer" } }
 })
