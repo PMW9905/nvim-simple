@@ -8,24 +8,20 @@ vim.o.shiftwidth = 4
 
 vim.o.swapfile = false
 
+-- Fix line endings for WSL/Windows
+vim.o.fileformats = "unix,dos"
+
 vim.o.winborder = 'rounded'
-
--- windows powershell config (windows branch only)
-local powershell_options = {
-  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
-  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-  shellquote = "",
-  shellxquote = "",
-}
-
-for option, value in pairs(powershell_options) do
-  vim.opt[option] = value
-end
 
 -- leader
 vim.g.mapleader = " "
+
+-- ctrl+C is esc
+vim.keymap.set({ 'n', 'i', 'v'}, '<C-c>', '<ESC>')
+
+-- init.lua
+vim.opt.fileformats = "dos,unix"  -- Prefer DOS (CRLF) format on Windows
+vim.opt.fileformat = "dos"        -- Default to DOS format for new files
 
 -- theme
 vim.pack.add({ { src = "https://github.com/sainnhe/everforest" } })
@@ -62,6 +58,10 @@ require('nvim-autopairs').setup({
 	event = "InsertEnter",
 	config = true,
 })
+
+-- lazygit
+vim.pack.add({ { src = "https://github.com/kdheepak/lazygit.nvim" } })
+vim.keymap.set({ 'n', 'i', 'v', 't' }, '<C-j>', '<CMD>LazyGit<CR>')
 
 -- terminal
 vim.pack.add({ { src = "https://github.com/akinsho/toggleterm.nvim" } })
@@ -100,7 +100,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'yaml', 'go', 'markdown'
+		'lua', 'yaml', 'markdown'
 	},
 	auto_install = true
 })
@@ -112,7 +112,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
 
-local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls' }
+local enabled_language_servers = { 'lua_ls', 'yamlls', 'eslint', 'ts_ls', 'html', 'cssls' }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -120,7 +120,39 @@ require("mason-lspconfig").setup({
 	ensure_installed = enabled_language_servers,
 })
 
-vim.keymap.set("n", '<leader>fm', vim.lsp.buf.format)
+-- Setup conform for formatting with Prettier
+vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
+require("conform").setup({
+	formatters_by_ft = {
+		javascript = { "prettier" },
+		typescript = { "prettier" },
+		javascriptreact = { "prettier" },
+		typescriptreact = { "prettier" },
+		css = { "prettier" },
+		html = { "prettier" },
+		json = { "prettier" },
+		yaml = { "prettier" },
+		markdown = { "prettier" },
+	},
+})
+
+-- Setup nvim-lint for linting with ESLint
+vim.pack.add({ { src = "https://github.com/mfussenegger/nvim-lint" } })
+require("lint").linters_by_ft = {
+	javascript = { "eslint" },
+	typescript = { "eslint" },
+	javascriptreact = { "eslint" },
+	typescriptreact = { "eslint" },
+}
+
+-- Auto-lint on save and on text change
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave" }, {
+	callback = function()
+		require("lint").try_lint()
+	end,
+})
+
+vim.keymap.set("n", '<leader>fm', function() require("conform").format({ lsp_fallback = true }) end)
 vim.keymap.set("n", '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set("n", '<leader>hd', vim.lsp.buf.hover)
 vim.keymap.set("n", '<leader>df', vim.lsp.buf.definition)
@@ -148,10 +180,6 @@ require("blink.cmp").setup({
 		use_nvim_cmp_as_default = true,
 		nerd_font_variant = "normal",
 	},
-	completion = {
-		auto_show = true,
-		auto_show_delay_ms = 200,
-	},
 
-	sources = { default = { "lsp" } }
+	sources = { default = { "lsp", "buffer" } }
 })
