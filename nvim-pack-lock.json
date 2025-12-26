@@ -77,6 +77,10 @@
       "rev": "14b4708018ee7fe3236e1d965ba589530a3374b6",
       "src": "https://github.com/tree-sitter/tree-sitter"
     },
+    "vim-sleuth": {
+      "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
+      "src": "https://github.com/tpope/vim-sleuth"
+    },
     "yazi.nvim": {
       "rev": "0635b1ef68430b57b15d285d5b16334225c7ad9a",
       "src": "https://github.com/mikavilpas/yazi.nvim"

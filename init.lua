@@ -13,6 +13,9 @@ vim.o.winborder = 'rounded'
 -- leader
 vim.g.mapleader = " "
 
+-- auto detect tabs
+vim.pack.add({{src="https://github.com/tpope/vim-sleuth"}})
+
 -- theme
 vim.pack.add({ { src = "https://github.com/sainnhe/everforest" } })
 vim.cmd("colorscheme everforest")
@@ -90,7 +93,7 @@ vim.pack.add({
 })
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'lua', 'yaml', 'go', 'markdown'
+		'lua', 'yaml', 'go', 'markdown', 'rust'
 	},
 	auto_install = true
 })
@@ -102,7 +105,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" }
 })
 
-local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls' }
+local enabled_language_servers = { 'lua_ls', 'yamlls', 'gopls', 'rust_analyzer' }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
