@@ -13,6 +13,9 @@ vim.o.winborder = 'rounded'
 -- leader
 vim.g.mapleader = " "
 
+-- bind for esc with ctrl+c
+vim.keymap.set({'n','i','v'}, '<C-c>', '<ESC>')
+
 -- auto detect tabs
 vim.pack.add({{src="https://github.com/tpope/vim-sleuth"}})
 
