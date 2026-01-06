@@ -21,6 +21,10 @@
       "rev": "3170d98240266a68c2611fc63260c3ab431575aa",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "indent-blankline.nvim": {
+      "rev": "005b56001b2cb30bfa61b7986bc50657816ba4ba",
+      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
     "lazygit.nvim": {
       "rev": "2305deed25bc61b866d5d39189e9105a45cf1cfb",
       "src": "https://github.com/kdheepak/lazygit.nvim"
@@ -84,6 +88,10 @@
     "tree-sitter": {
       "rev": "14b4708018ee7fe3236e1d965ba589530a3374b6",
       "src": "https://github.com/tree-sitter/tree-sitter"
+    },
+    "vim-sleuth": {
+      "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
+      "src": "https://github.com/tpope/vim-sleuth"
     },
     "yazi.nvim": {
       "rev": "0635b1ef68430b57b15d285d5b16334225c7ad9a",

@@ -5,11 +5,28 @@ vim.o.relativenumber = true
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
+vim.o.expandtab = true  -- Use spaces by default, unless detected otherwise
+vim.o.smartindent = true  -- Smart autoindenting
+
+
+if vim.g.neovide then
+	vim.g.neovide_normal_opacity = .6
+end
+
+-- Detect indentation automatically from file content
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	callback = function()
+		vim.cmd("silent! DetectIndent")
+	end,
+})
 
 vim.o.swapfile = false
 
--- Fix line endings for WSL/Windows
-vim.o.fileformats = "unix,dos"
+-- -- Fix line endings for WSL/Windows
+-- vim.o.fileformats = "unix,dos"
+
+-- Line endings for Windows
+vim.opt.fileformats = "dos,unix"  -- Prefer CRLF, but handle LF
 
 vim.o.winborder = 'rounded'
 
@@ -20,8 +37,8 @@ vim.g.mapleader = " "
 vim.keymap.set({ 'n', 'i', 'v'}, '<C-c>', '<ESC>')
 
 -- init.lua
-vim.opt.fileformats = "dos,unix"  -- Prefer DOS (CRLF) format on Windows
-vim.opt.fileformat = "dos"        -- Default to DOS format for new files
+-- vim.opt.fileformats = "dos,unix"  -- Prefer DOS (CRLF) format on Windows
+-- vim.opt.fileformat = "dos"        -- Default to DOS format for new files
 
 -- theme
 vim.pack.add({ { src = "https://github.com/sainnhe/everforest" } })
@@ -93,6 +110,22 @@ require("yazi").setup({
 vim.keymap.set("n", "<C-y>", function()
 	require("yazi").yazi()
 end)
+
+-- indentation detection
+vim.pack.add({ { src = "https://github.com/tpope/vim-sleuth" } })
+
+-- indentation guides
+vim.pack.add({ { src = "https://github.com/lukas-reineke/indent-blankline.nvim" } })
+require("ibl").setup({
+	indent = {
+		char = "│",
+	},
+	scope = {
+		enabled = true,
+		show_start = true,
+		show_end = false,
+	},
+})
 
 -- syntax highlighting
 vim.pack.add({
